@@ -4,8 +4,8 @@ export default class Tabela extends React.Component{
 
     render(){
         return(
-            <div>
-                <table className="tabela-carros">
+            <div className="container mt-5">
+                <table className="table">
                     <thead>
                         <tr>
                             <td>Id</td>
