@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.tabela-carros
+{
+    float: left;
+    width: 80%;
+    margin: 30px 10%;
+    text-align: center;   
+
+}
+
+.tabela-carros thead tr:first-child
+{
+  background: black;
+  color: white;
+  font-weight: bold; 
+
+}
+
+.tabela-carros tbody tr:nth-child(2n - 1)
+{
+  background: #CCC;
+
+}
