@@ -15,7 +15,7 @@ export default class App extends React.Component{
 
     exibirCarros()
     {
-        fetch("http://localhost/react_js/projetoum/src/api/") // acesso essa url
+        fetch("http://localhost/REACT/projetoum/src/api/") // acesso essa url
         .then((response)=>response.json())      // tras uma reposta
         .then((responseJson)=>{   // essa reposta vou manipular
             this.setState({
