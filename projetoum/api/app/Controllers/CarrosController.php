@@ -13,6 +13,12 @@ class CarrosController extends Controller
 
     }
 
+    public function index()
+    {
+        $this->view('home/erro');
+    }
+
+
     public function listar()
     {
        $listaCarros = $this->carrosModel->exibeCarros();
@@ -36,6 +42,24 @@ class CarrosController extends Controller
        header("Access-Control-Allow-Origin:*");
        header("Content-type: application/json");
        echo json_encode($output);
+
+
+    }
+
+    public function gravar()
+    {
+        $dado = (object)[];
+
+        $dado->marca  = trim($_POST['marca']);
+        $dado->modelo = trim($_POST['modelo']);
+        $dado->ano    = trim($_POST['ano']);
+
+        
+
+       
+       header("Access-Control-Allow-Origin:*");
+       header("Content-type: application/json");
+       echo json_encode($dado);
 
 
     }

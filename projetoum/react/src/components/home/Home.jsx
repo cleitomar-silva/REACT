@@ -1,21 +1,27 @@
 import React from "react";
-import Tabela from "./tabela";
+import Tabela from "../Tabela";
+import Header from "../template/Header";
+import * as  Config from "../../main/Config";
 
-export default class App extends React.Component{
 
 
+export default class Home extends React.Component{
+   
     constructor(){
         super();
         this.state=({
-            db: []
+            db: [],
+            url: Config.LISTAR_CARROS
         });
         this.exibirCarros();
 
     }
+    
+    
 
     exibirCarros()
     {
-        fetch("http://localhost/REACT/projetoum/api/carros/listar") // acesso essa url
+        fetch(this.state.url) // acesso essa url
         .then((response)=>response.json())      // tras uma reposta
         .then((responseJson)=>{   // essa reposta vou manipular
             this.setState({
@@ -25,12 +31,17 @@ export default class App extends React.Component{
         })
     }
 
+    
+
 
     render(){
+        
         return(
             <div>
-                <Tabela arrayCarros={this.state.db} />
+                <Header icon="home" title="Inicio" />
+                <Tabela arrayCarros={this.state.db}  />
             </div>
         );
     }
+
 }
