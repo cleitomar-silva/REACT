@@ -49,16 +49,26 @@ class CarrosController extends Controller
     public function gravar()
     {
         $dado = (object)[];
-
-        $dado->marca  = trim($_POST['marca']);
-        $dado->modelo = trim($_POST['modelo']);
-        $dado->ano    = trim($_POST['ano']);
-
         
 
+        $_POST = json_decode(file_get_contents("php://input"),true);    
+
+        if($_POST){
+            $dado->marca  = trim($_POST['marca']);
+            $dado->modelo = trim($_POST['modelo']);
+            $dado->ano    = trim($_POST['ano']);
+        }
+
+        
        
-       header("Access-Control-Allow-Origin:*");
-       header("Content-type: application/json");
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Headers: X-Requested-With, Content-Type, Origin, Cache-Control, Pragma, Authorization, Accept, Accept-Encoding");
+    
+       
+
+       
+       
+
        echo json_encode($dado);
 
 

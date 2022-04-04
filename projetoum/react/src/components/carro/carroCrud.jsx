@@ -1,45 +1,54 @@
-import React from "react"
+import React, {useState} from "react"
 import Header from "../template/Header"
 import * as  Config from "../../main/Config";
+import axios from "axios";
+// import { UseHistory } from 'react-router-dom';
 
 // ATUALIZAR_CARROS
 // GRAVAR_CARROS
 
-export default class carroCrud extends React.Component{
+const initialValue = {
+    marca: '',
+    modelo:'',
+    ano: '',           
+    url: Config.GRAVAR_CARROS
+}
+
+
+
+export default function CarroCrud()
+{
     
-    constructor(){
-        super();
-        this.state=({
-            list: [],
-            marca: '',
-            modelo:'',
-            ano: '',           
-            url: Config.GRAVAR_CARROS
-           
-        });
-    }
+    const [values, setValues] = useState(initialValue);
+    // const history = UseHistory();
 
-    limpar(){
-        this.setState({ marca: this.state.marca })
-    }
+    
 
-    gravar(e)
+    function gravar(e)
     {
         e.preventDefault();
 
-       fetch(this.state.url) // acesso essa url
-        .then((response)=>response.json())      // tras uma reposta
-        .then((responseJson)=>{   // essa reposta vou manipular
-            this.setState({
-                id: responseJson
-            });
-            
-        }) 
+    
+        axios.post(values.url, values)
+        .then((response) => {
+            console.log(response.data);
+        });
         
-    }     
+              
+    }    
+    
+
+    function pegarValores(ev) 
+    {
+              
+        const { name, value } = ev.target;         
+
+        setValues({ ...values, [name]: value  });
+        
+    }
 
 
-    render(){
+    
         return(
             <div>
                 <Header icon="car" title="Carros" />
@@ -47,24 +56,24 @@ export default class carroCrud extends React.Component{
                 
 
                 <div className="container">
-                    <form onSubmit={e =>this.gravar(e)} method="post">
+                    <form onSubmit={gravar} >
                         <div className="row">
                             <div className="col-lg-3">
                                 <div className="mb-3">
                                     <label htmlFor="marca" className="form-label">Marca</label>
-                                    <input type="text" className="form-control form-control-sm" id="marca" name="marca" />
+                                    <input type="text" className="form-control form-control-sm" id="marca" name="marca" onChange={pegarValores} />
                                 </div>  
                             </div>
                             <div className="col-lg-3">
                                 <div className="mb-3">
                                     <label htmlFor="modelo" className="form-label">Modelo</label>
-                                    <input type="text" className="form-control form-control-sm" id="modelo" name="modelo" />
+                                    <input type="text" className="form-control form-control-sm" id="modelo" name="modelo" onChange={pegarValores} />
                                 </div>  
                             </div>
                             <div className="col-lg-3">
                                 <div className="mb-3">
                                     <label htmlFor="ano" className="form-label">Ano</label>
-                                    <input type="text" className="form-control form-control-sm" id="ano" name="ano" />
+                                    <input type="text" className="form-control form-control-sm" id="ano" name="ano" onChange={pegarValores} />
                                 </div>  
                             </div>
                         </div>
@@ -83,6 +92,6 @@ export default class carroCrud extends React.Component{
                 
 
         );
-    }
+    
 
 }
