@@ -31,4 +31,31 @@ class CarrosModel
 
     } 
 
+    public function armazenar($dados)
+    {
+        $this->db->query("INSERT INTO carros 
+                                            (marca,
+                                             modelo,
+                                             ano
+                                             ) 
+                                            VALUES (:marca, 
+                                                    :modelo, 
+                                                    :ano
+                                                    ) ");
+        $this->db->bind("marca", $dados->marca);
+        $this->db->bind("modelo", $dados->modelo);
+        $this->db->bind("ano", $dados->ano);
+       
+        if($this->db->executa())
+        {
+            return $this->db->ultimoIdInserido();
+
+        }else
+        {
+            return false;
+        }
+    }
+
+
+
 }

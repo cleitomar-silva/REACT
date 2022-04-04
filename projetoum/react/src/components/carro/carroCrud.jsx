@@ -2,7 +2,8 @@ import React, {useState} from "react"
 import Header from "../template/Header"
 import * as  Config from "../../main/Config";
 import axios from "axios";
-// import { UseHistory } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
+
 
 // ATUALIZAR_CARROS
 // GRAVAR_CARROS
@@ -20,34 +21,30 @@ export default function CarroCrud()
 {
     
     const [values, setValues] = useState(initialValue);
-    // const history = UseHistory();
-
-    
+   // const history = useLocation();    
 
     function gravar(e)
     {
         e.preventDefault();
 
+      
     
         axios.post(values.url, values)
         .then((response) => {
-            console.log(response.data);
-        });
-        
+            document.getElementById("create-carro-form").reset();
+
+           // history.push("/");
+        });        
               
-    }    
-    
+    }        
 
     function pegarValores(ev) 
-    {
-              
+    {              
         const { name, value } = ev.target;         
 
         setValues({ ...values, [name]: value  });
         
     }
-
-
     
         return(
             <div>
@@ -56,7 +53,7 @@ export default function CarroCrud()
                 
 
                 <div className="container">
-                    <form onSubmit={gravar} >
+                    <form onSubmit={gravar} id="create-carro-form">
                         <div className="row">
                             <div className="col-lg-3">
                                 <div className="mb-3">
