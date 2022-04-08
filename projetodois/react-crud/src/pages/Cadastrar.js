@@ -8,6 +8,11 @@ export default function Cadastrar()
         descricao: ''
     })
 
+    const [status, setStatus] = useState({        
+        type: '',
+        mensagem: ''
+    })
+
     function valorInput(e) 
     {              
         e.preventDefault();
@@ -30,8 +35,28 @@ export default function Cadastrar()
         })
         .then((response) => response.json())     
         .then((responseJson) => {
-            console.log(responseJson);
-        }); 
+            if(responseJson)
+            {
+                setStatus({
+                    type: 'sucesso',
+                    mensagem: "Gravado" 
+                })
+            }
+            else
+            {
+                setStatus({
+                    type: 'erro',
+                    mensagem: 'Nao foi possivel cadastrar produto' 
+                })
+            }
+
+        })
+        .catch(() =>{
+            setStatus({
+                type: 'erro',
+                mensagem: "Erro! Nao foi possivel conectar" 
+            })
+        })
 
     }
 
@@ -39,6 +64,20 @@ export default function Cadastrar()
         <div className="container mt-5">
             <div className="card">
                 <div className="card-body">
+
+                    {status.type === 'erro' ? 
+                       <div className="alert alert-danger" role="alert">
+                            {status.mensagem}                         
+                        </div>
+                         : ""                         
+                    }
+                    {status.type === 'sucesso' ? 
+                       <div className="alert alert-success" role="alert">
+                            {status.mensagem}
+                        </div>
+                         : ""                         
+                    }
+
                     <form onSubmit={cadastrarProduto}>
                         <div className="mb-3">
                             <label htmlFor="titulo" className="form-label">Titulo</label>
