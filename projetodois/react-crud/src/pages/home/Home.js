@@ -1,4 +1,5 @@
 import React, {useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 
 export default function Home(){
@@ -36,7 +37,10 @@ export default function Home(){
               <th>{produto.id}</th>
               <td>{produto.titulo}</td>
               <td>{produto.descricao}</td>
-              <td>Visualizar Editar Apagar</td>
+              <td>
+                <Link className="btn btn-sm btn-info me-3" to={"/visualizar/" + produto.id}>Visualizar</Link>
+                 Editar Apagar
+              </td>
             </tr>
           ))}
         </tbody>

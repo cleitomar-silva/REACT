@@ -54,6 +54,26 @@ class ProdutosModel
         }
     }  
 
+    public function visualizar($id)
+    {
+        
+        $this->db->query("SELECT * FROM produtos WHERE id = :id");
+        $this->db->bind("id", $id);
+      
+        $resultado = $this->db->resultado();
+
+        if($resultado)
+        {
+           return $resultado;
+
+        }else
+        {
+            return false;
+        }
+        
+
+    } 
+
 
 
 }

@@ -42,8 +42,6 @@ class ProdutosController extends Controller
 
       
        echo json_encode($output);
-
-
     }
 
     
@@ -65,8 +63,23 @@ class ProdutosController extends Controller
 
         echo json_encode($retorno);
 
-
     } 
+
+    public function visualisar($id = 0)
+    {
+        header("Access-Control-Allow-Origin:*");
+        header("Content-type: application/json; charset=UTF-8");
+
+        $lista = false;
+ 
+        if($id)
+        {      
+            $lista = $this->model->visualizar($id);
+        }
+
+        echo json_encode($lista);
+
+    }
 
  
 

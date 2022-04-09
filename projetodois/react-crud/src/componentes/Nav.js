@@ -24,6 +24,7 @@ export default function Nav(){
                         <li className="nav-item">
                             <Link className="nav-link" to="/cadastrar">Cadastar</Link>
                         </li>
+                        
                        
                         
                     </ul>                    
